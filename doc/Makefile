@@ -1,6 +1,6 @@
 # Aqui vocẽ adiciona os arquivos de entrada
 # em formato Markdown separados por espaços.
-INPUT_FILES=md/header.md
+INPUT_FILES=md/header.md md/math_desc.md
 
 # Nome do Arquivo PDF de saída
 OUTPUT_NAME=DCC199_TPFinal_YuriNiitsuma_BrunoMarques.pdf
