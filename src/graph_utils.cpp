@@ -4,7 +4,7 @@
 int Graph::overFlowVertex(std::vector<Vertex>& ver) {
   // ignore index 0?
   // TODO: make dynamic source and sink
-  for (long long i = 1; i < n-1; i++)
+  for (unsigned int i = 1; i < vertexs.size() - 1; i++)
   if (ver[i].excessFlow > 0)
     return i;
 
@@ -27,3 +27,22 @@ void Graph::updateReverseEdgeFlow(int i, long long flow) {
   // adding reverse Edge in residual graph
   addEdge(u, v, 0, flow);
 };
+
+// For DEBUG purpose
+void Graph::printInfoGraph() {
+  std::cout << "Vertexs:\n";
+  std::cout << "height\t excessFlow\n";
+  // print vertexs
+  for(auto &ver : this->vertexs) {
+    std::cout << ver.height << '\t' << ver.excessFlow << '\n';
+  }
+
+  std::cout << "\nEdges:\n";
+  std::cout << "u\tv\tflow\tcapacity\n";
+  // print edges
+  for(unsigned int i = 0; i < this->edges.size(); i++) {
+    Edge edge = this->edges[i];
+    std::cout << edge.u << '\t' << edge.v << '\t' << edge.flow << '\t' << edge.capacity << '\n';
+  }
+  std::cout << '\n';
+}

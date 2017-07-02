@@ -1,13 +1,15 @@
 #include "utils.hpp"
 #include "graph.hpp"
+#include "graph_utils.hpp"
 
 #include <iostream>
 
 // int main(int argc, char const *argv[]) {
 int main() {
-  long long n;
-  long long s, t, m;
-  long long u, v, c;
+  int n;
+  int s, t, m;
+  int u, v;
+  long long c;
 
   while (std::cin >> n) {
     // n == 0 finish
@@ -30,9 +32,11 @@ int main() {
         std::cout << "Add edge to Graph. Edge(" << u << ", " << v << ")\n";
       }
     }
+    graph.printInfoGraph();
     /*****************************/
     // get max flow with push relabel
     std::cout << graph.pushRelabel(s, t) << '\n';
+    graph.printInfoGraph();
   }
   return 0;
 }

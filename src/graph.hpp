@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <vector>
+#include <climits>
 
 /*****************************************/
 class Vertex {
@@ -60,6 +61,9 @@ public:
 
   bool addEdge(int u, int v, long long capacity);
   long long pushRelabel(int source, int sink);
+
+  //DEBUG
+  void printInfoGraph();
 };
 
 #endif
