@@ -1,8 +1,9 @@
 #include "graph_utils.hpp"
 
 // returns index of overflowing Vertex
-long long Graph::overFlowVertex(std::vector<Vertex>& ver) {
+int Graph::overFlowVertex(std::vector<Vertex>& ver) {
   // ignore index 0?
+  // TODO: make dynamic source and sink
   for (long long i = 1; i < n-1; i++)
   if (ver[i].excessFlow > 0)
     return i;
@@ -12,13 +13,11 @@ long long Graph::overFlowVertex(std::vector<Vertex>& ver) {
 };
 
 // Update reverse flow for flow added on ith Edge
-void Graph::updateReverseEdgeFlow(long long i, long long flow) {
-  long long u, v;
+void Graph::updateReverseEdgeFlow(int i, long long flow) {
+  int u, v;
   u = edges[i].v; v = edges[i].u;
 
-  long long how_many_edges = (long long) edges.size();
-
-  for (long long j = 0; j < how_many_edges; j++) {
+  for (unsigned int j = 0; j < edges.size(); j++) {
     if (edges[j].v == v && edges[j].u == u) {
       edges[j].flow -= flow;
       return;
