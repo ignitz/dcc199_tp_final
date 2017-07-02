@@ -186,6 +186,12 @@ all: $(BIN_PATH)/$(BIN_NAME)
 	@$(RM) $(BIN_NAME)
 	@ln -s $(BIN_PATH)/$(BIN_NAME) $(BIN_NAME)
 
+# "My code.", Smeagol
+.PHONY: dirs
+release: dirs
+run:
+	@./$(BIN_NAME) < tests/input1.txt
+
 # Link the executable
 $(BIN_PATH)/$(BIN_NAME): $(OBJECTS)
 	@echo "Linking: $@"
