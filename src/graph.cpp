@@ -8,6 +8,7 @@ bool Graph::addEdge(int u, int v, long long capacity){
 };
 
 bool Graph::addEdge(int u, int v, long long capacity, long long flow){
+  std::cout << OKGREEN << "Add edge to Graph. Edge(" << u << ", " << v << ") " << capacity << " " << flow << "\n" << ENDC;
   if (u >= n || v >= n || u < 0 || v < 0) return false;
   edges.push_back(Edge(u, v, capacity, flow));
   return true;
@@ -31,6 +32,7 @@ void Graph::initialize_preflow(int s, int t) {
 
       // Add an edges from v to s in residual graph with
       // capacity equal to 0
+      std::cout << "edges[i].flow " << edges[i].flow << '\n';
       addEdge(edges[i].v, s, 0, -edges[i].flow);
     }
   }

@@ -28,9 +28,6 @@ int main() {
         std::cerr << "Invalid range of edge\n  u = " << u << "\n  v = " << v << '\n';
         return 1;
       }
-      else {
-        std::cout << "Add edge to Graph. Edge(" << u << ", " << v << ")\n";
-      }
     }
     graph.printInfoGraph();
     /*****************************/
