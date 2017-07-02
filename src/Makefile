@@ -208,16 +208,13 @@ $(BIN_PATH)/$(BIN_NAME): $(OBJECTS)
 
 #make run
 run:
-	@./$(BIN_NAME) < tests/input1.txt
-	@./$(BIN_NAME) < tests/input1000000.txt
-	@./$(BIN_NAME) < tests/input100000.txt
-	@./$(BIN_NAME) < tests/input10000.txt
-	@./$(BIN_NAME) < tests/input1000.txt
-	@./$(BIN_NAME) < tests/input100.txt
-	@./$(BIN_NAME) < tests/input1.txt
 	@./$(BIN_NAME) < tests/input4.txt
-	@./$(BIN_NAME) < tests/input50.txt
-	@./$(BIN_NAME) < tests/input70.txt
+	@./$(BIN_NAME) < tests/input6.txt
+	@./$(BIN_NAME) < tests/input100.txt
+	@./$(BIN_NAME) < tests/input1000.txt
+	@./$(BIN_NAME) < tests/input10000.txt
+	@./$(BIN_NAME) < tests/input100000.txt
+	@./$(BIN_NAME) < tests/input1000000.txt
 
 # Add dependency files, if they exist
 -include $(DEPS)
