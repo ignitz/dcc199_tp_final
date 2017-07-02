@@ -2,7 +2,7 @@
 
 Este trabalho tem como objetivo pegar um tema em grafos e produzir um artigo documentado sobre um tema específico.
 
-O tema escolhido é **Paralelismo em Grafos**.
+O tema escolhido é **Push-Relabel**.
 
 Temos como objetivo pegar algoritmos clássicos e tentar paralelizarmos utilizando a linguagem C++ 14.
 
