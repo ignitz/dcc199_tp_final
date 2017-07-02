@@ -104,15 +104,16 @@ void preflow(Graph* g, int s){
     Edge* e;
     g->vertexList[s].height = g->size;
 
-    n = n->next;
-    while(n!=NULL){
-        
+    while(n->next!=NULL){
+        n = n->next;
         e = (Edge*)n->content;
         if(e->u==s){
             e->flow = e->capacity;
             g->vertexList[e->v].eFlow = e->flow;
+            //residual graph things
+            e = makeEdge(-e->flow, 0, e->v, s);
+            addToList(g->edgeList, (void*)e);
         }
-        n = n->next;
     }
 }
 
@@ -139,12 +140,12 @@ void reverseFlow(Graph* g, Edge* e, int flow){
         n = n->next;
         ed = (Edge*)n->content;
         if(ed->v==v && ed->u==u){
-            e->flow -= flow;
+            ed->flow -= flow;
             return;
         }
     }
-    ed = makeEdge(0, flow, u, v);
-    //ed = makeEdge(-flow, 0, u, v);
+    //ed = makeEdge(0, flow, u, v);
+    ed = makeEdge(-flow, 0, u, v);
     addToList(g->edgeList, (void*)ed);
 }
 
@@ -186,10 +187,9 @@ bool push(Graph* g, int u){
                 continue;
             if(g->vertexList[u].height>g->vertexList[e->v].height){
                 //min(a,b)
-                flow = (e->capacity-e->flow<g->vertexList[u].eFlow)?(e->capacity-e->flow):(g->vertexList[u].eFlow);
+                flow = ((e->capacity-e->flow)<(g->vertexList[u].eFlow))?(e->capacity-e->flow):(g->vertexList[u].eFlow);
                 g->vertexList[u].eFlow -= flow;
-                g->vertexList[e->v].eFlow += flow;
-                e->flow += flow;
+                g->vertexList[e->v].eFlow += flow;e->flow += flow;
                 reverseFlow(g, e, flow);
                 return true;
             }
@@ -209,7 +209,12 @@ int getMaxFlow(Graph* g, int source, int sink){
             relabel(g, i);
         i = vertexOverFlow(g);
     }
-    return g->vertexList[g->size-1].eFlow;
+    Node* n = g->edgeList;
+    while(n->next!=NULL){
+        n = n->next;
+        Edge* e = (Edge*)n->content;
+    }
+    return g->vertexList[sink].eFlow;
 }
 
 
