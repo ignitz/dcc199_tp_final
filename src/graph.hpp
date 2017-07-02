@@ -43,8 +43,8 @@ private:
   bool addEdge(int u, int v, long long capacity, long long flow);
 
   // utils
-  void initialize_preflow(int index_source);
-  int overFlowVertex(std::vector<Vertex>& ver);
+  void initialize_preflow(int index_source, int index_sink);
+  int overFlowVertex();
   void updateReverseEdgeFlow(int i, long long flow);
 
   bool push(int u);

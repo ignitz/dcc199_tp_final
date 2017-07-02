@@ -1,12 +1,13 @@
 #include "graph_utils.hpp"
 
 // returns index of overflowing Vertex
-int Graph::overFlowVertex(std::vector<Vertex>& ver) {
+int Graph::overFlowVertex() {
   // ignore index 0?
   // TODO: make dynamic source and sink
-  for (unsigned int i = 1; i < vertexs.size() - 1; i++)
-  if (ver[i].excessFlow > 0)
-    return i;
+  for (unsigned int i = 0; i < vertexs.size(); i++) {
+    if (i == source || i == sink) continue;
+    if (vertexs[i].excessFlow > 0) return i;
+  }
 
   // -1 if no overflowing Vertex
   return -1;
@@ -30,19 +31,20 @@ void Graph::updateReverseEdgeFlow(int i, long long flow) {
 
 // For DEBUG purpose
 void Graph::printInfoGraph() {
-  std::cout << "Vertexs:\n";
+  std::cout << "\n=======================================================================\n";
+  std::cout << OKBLUE << "Vertexs:\n";
   std::cout << "height\t excessFlow\n";
   // print vertexs
   for(auto &ver : this->vertexs) {
     std::cout << ver.height << '\t' << ver.excessFlow << '\n';
   }
 
-  std::cout << "\nEdges:\n";
+  std::cout << OKGREEN << "\nEdges:\n";
   std::cout << "u\tv\tflow\tcapacity\n";
   // print edges
   for(unsigned int i = 0; i < this->edges.size(); i++) {
     Edge edge = this->edges[i];
     std::cout << edge.u << '\t' << edge.v << '\t' << edge.flow << '\t' << edge.capacity << '\n';
   }
-  std::cout << '\n';
+  std::cout << "--------------------------------------------------------------------------\n" << ENDC;
 }

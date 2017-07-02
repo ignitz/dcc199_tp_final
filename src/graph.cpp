@@ -13,7 +13,9 @@ bool Graph::addEdge(int u, int v, long long capacity, long long flow){
   return true;
 };
 
-void Graph::initialize_preflow(int s) {
+void Graph::initialize_preflow(int s, int t) {
+  source = s;
+  sink = t;
   // Making h of source Vertex equal to no. of vertices
   // Height of other vertices is 0.
   vertexs[s].height = vertexs.size();
@@ -109,14 +111,14 @@ bool Graph::relabel(int u) {
 };
 
 long long Graph::pushRelabel(int s, int t) {
-  initialize_preflow(s);
+  initialize_preflow(s, t);
 
   // Main loop
   // while there is a vertex v != s, t with \alpha_f(v) > 0; do
-  while (overFlowVertex(vertexs) != -1) {
+  while (overFlowVertex() != -1) {
 
     // choose such a vertex v with the maximum height h(v)
-    int u = overFlowVertex(vertexs);
+    int u = overFlowVertex();
     // there is an outgoing edge (v, w) of v in G_f with h(v) = h(w) + 1
     if (!push(u))
     relabel(u);
@@ -124,7 +126,7 @@ long long Graph::pushRelabel(int s, int t) {
 
   // ver.back() returns last Vertex, whose
   // e_flow will be final maximum flow
-  return vertexs.back().excessFlow;
+  return vertexs[sink].excessFlow;
 };
 
 /*****************************************/
