@@ -65,7 +65,7 @@ Vertex makeVertex(int height, int eFlow){
 */
 Graph* makeGraph(int size){
     int i;
-    
+
     if(size<=0) //needs to have at least one vertex
         return NULL;
 
@@ -219,21 +219,20 @@ int getMaxFlow(Graph* g, int source, int sink){
 
 
 int main(){
-    int v = 6;
-    Graph* g = makeGraph(6);
-    addEdge(g, 0, 1, 16);
-    addEdge(g, 0, 2, 13);
-    addEdge(g, 1, 2, 10);
-    addEdge(g, 2, 1, 4);
-    addEdge(g, 1, 3, 12);
-    addEdge(g, 2, 4, 14);
-    addEdge(g, 3, 2, 9);
-    addEdge(g, 3, 5, 20);
-    addEdge(g, 4, 3, 7);
-    addEdge(g, 4, 5, 4);
-    int s= 0;
-    int t=5;
-    Node* n = g->edgeList;
+    int n, s, t, m;
+    int u, v, c;
+    scanf("%d\n", &n);
+    if (n <= 0) return 1;
+    Graph* g = makeGraph(n);
+
+    scanf("%d %d %d\n", &s, &t, &m);
+
+    for (int i = 0; i < m; i++) {
+      scanf("%d %d %d\n", &u, &v, &c);
+      addEdge(g, u, v, c);
+    }
+
+    // Node* n = g->edgeList;
     printf("%d\n", getMaxFlow(g, s, t));
 }
 /*

@@ -1,16 +1,16 @@
 #### PROJECT SETTINGS ####
 # The name of the executable to be created
-BIN_NAME := marblecake
+BIN_NAME := push_relabel
 # Compiler used
-CXX ?= g++
+CC ?= gcc
 # Extension of source files used in the project
-SRC_EXT = cpp
+SRC_EXT = c
 # Path to the source directory, relative to the makefile
 SRC_PATH = .
 # Space-separated pkg-config libraries used by this project
 LIBS =
 # General compiler flags
-COMPILE_FLAGS = -std=c++11 -Wall -Wextra -g
+COMPILE_FLAGS = -std=c99 -Wall -Wextra -g
 # Additional release-specific flags
 RCOMPILE_FLAGS = -D NDEBUG
 # Additional debug-specific flags
@@ -63,9 +63,9 @@ ifeq ($(V),true)
 endif
 
 # Combine compiler and linker flags
-release: export CXXFLAGS := $(CXXFLAGS) $(COMPILE_FLAGS) $(RCOMPILE_FLAGS)
+release: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(RCOMPILE_FLAGS)
 release: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(RLINK_FLAGS)
-debug: export CXXFLAGS := $(CXXFLAGS) $(COMPILE_FLAGS) $(DCOMPILE_FLAGS)
+debug: export CFLAGS := $(CFLAGS) $(COMPILE_FLAGS) $(DCOMPILE_FLAGS)
 debug: export LDFLAGS := $(LDFLAGS) $(LINK_FLAGS) $(DLINK_FLAGS)
 
 # Build and output paths
@@ -130,7 +130,7 @@ ifeq ($(shell git describe > /dev/null 2>&1 ; echo $$?), 0)
 	VERSION_HASH := $(word 5, $(VERSION))
 	VERSION_STRING := \
 		"$(VERSION_MAJOR).$(VERSION_MINOR).$(VERSION_PATCH).$(VERSION_REVISION)-$(VERSION_HASH)"
-	override CXXFLAGS := $(CXXFLAGS) \
+	override CFLAGS := $(CFLAGS) \
 		-D VERSION_MAJOR=$(VERSION_MAJOR) \
 		-D VERSION_MINOR=$(VERSION_MINOR) \
 		-D VERSION_PATCH=$(VERSION_PATCH) \
@@ -171,6 +171,18 @@ dirs:
 	@mkdir -p $(dir $(OBJECTS))
 	@mkdir -p $(BIN_PATH)
 
+# Installs to the set path
+.PHONY: install
+install:
+	@echo "Installing to $(DESTDIR)$(INSTALL_PREFIX)/bin"
+	@$(INSTALL_PROGRAM) $(BIN_PATH)/$(BIN_NAME) $(DESTDIR)$(INSTALL_PREFIX)/bin
+
+# Uninstalls the program
+.PHONY: uninstall
+uninstall:
+	@echo "Removing $(DESTDIR)$(INSTALL_PREFIX)/bin/$(BIN_NAME)"
+	@$(RM) $(DESTDIR)$(INSTALL_PREFIX)/bin/$(BIN_NAME)
+
 # Removes all build files
 .PHONY: clean
 clean:
@@ -190,9 +202,13 @@ all: $(BIN_PATH)/$(BIN_NAME)
 $(BIN_PATH)/$(BIN_NAME): $(OBJECTS)
 	@echo "Linking: $@"
 	@$(START_TIME)
-	$(CMD_PREFIX)$(CXX) $(OBJECTS) $(LDFLAGS) -o $@
+	$(CMD_PREFIX)$(CC) $(OBJECTS) $(LDFLAGS) -o $@
 	@echo -en "\t Link time: "
 	@$(END_TIME)
+
+#make run
+run:
+	./run.sh
 
 # Add dependency files, if they exist
 -include $(DEPS)
@@ -203,6 +219,6 @@ $(BIN_PATH)/$(BIN_NAME): $(OBJECTS)
 $(BUILD_PATH)/%.o: $(SRC_PATH)/%.$(SRC_EXT)
 	@echo "Compiling: $< -> $@"
 	@$(START_TIME)
-	$(CMD_PREFIX)$(CXX) $(CXXFLAGS) $(INCLUDES) -MP -MMD -c $< -o $@
+	$(CMD_PREFIX)$(CC) $(CFLAGS) $(INCLUDES) -MP -MMD -c $< -o $@
 	@echo -en "\t Compile time: "
 	@$(END_TIME)
