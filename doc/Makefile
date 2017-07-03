@@ -1,9 +1,17 @@
 # Aqui vocẽ adiciona os arquivos de entrada
 # em formato Markdown separados por espaços.
-INPUT_FILES=md/header.md md/math_desc.md
+INPUT_FILES=md/header.md \
+md/desc_problem.md \
+md/relacao_problemas.md \
+md/math_desc.md \
+md/corretude.md \
+md/corretude2.md \
+md/complexidade.md \
+md/estruturas.md \
+md/referencias.md
 
 # Nome do Arquivo PDF de saída
-OUTPUT_NAME=DCC199_TPFinal_YuriNiitsuma_BrunoMarques.pdf
+OUTPUT_NAME=DCC199_TPFinal_YuriNiitsuma_BrenoMarques.pdf
 
 all:
 	@make clean
