@@ -4,7 +4,7 @@ Este trabalho tem como objetivo pegar um tema em grafos e produzir um artigo doc
 
 O tema escolhido é **Push-Relabel**.
 
-Temos como objetivo pegar algoritmos clássicos e tentar paralelizarmos utilizando a linguagem C++ 14.
+Temos como objetivo pegar algoritmos clássicos e tentar paralelizarmos utilizando a linguagem ~~C++ 14~~ C.
 
 ## Estrutura dos diretórios
 
@@ -12,6 +12,7 @@ Temos como objetivo pegar algoritmos clássicos e tentar paralelizarmos utilizan
 - **src**: Código fonte com testes e instâncias.
 
 ## Texto do professor como sugestão para escolher um tema
+
 ```
 1 Dijskstra (implementação)
 

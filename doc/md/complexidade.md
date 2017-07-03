@@ -1,0 +1,12 @@
+## Complexidade
+
+O *relabel* só é executado até $\left( 2\left| V \right|-1 \right)\left( \left| V \right|-2 \right)$ vezes. Já que a altura $h(u)$ não pode ser diminuída, o seu valor máximo é de $2\left| V \right|-1$ para cada vértice. Nota-se que o *relabel* só pode ser aplicado a até $\left| V \right|-2$ vértices. Logo, o *relabel* tem complexidade de $O\left( |V{{|}^{2}} \right)$.
+
+A operação de push deve ser divida em duas: os *pushs* que saturam o grafo residual e aqueles que não o saturam. No primeiro tipo o arco $(u,v)$ por onde a operação é feita é removido de $G_f$. Ele só poderá ser inserido novamente se houver um *relabel* sobre o vértice $v$, deve haver um push por $(v,u)$ e então $u$ deverá sofrer um *relabel* também. Nesse processo, a altura $h(u)$ aumenta em pelo menos dois. Logo, existem menos de $2\left| V \right|$ *pushs* saturantes entre $u$ e $v$. Multiplicado ao número de arestas onde isso pode ocorrer, temos até $2\left| V \right|\left| E \right|$ ocorrências no grafo, com complexidade $O\left( \left| V \right|\left| E \right| \right)$.
+
+A seguir devemos encontrar a quantidade de *pushs* não saturantes. Isso será feito pelo método do potencial, com função
+$\Phi =\underset{\left[ u\in V,~e\left( u \right)>0 \right]}{\overset{{}}{\mathop \sum }}\,h\left( u \right)$. O *relabel* de um vértice $u$ aumenta o valor de $\Phi$ em menos de $2\left| V \right|$, pois o conjunto sobre o qual a soma é tomada se mantém o mesmo. Em um push saturante de um vértice $u$ até um $v$, o valor de $\Phi$ aumenta em menos de $2\left| V \right|$, pois nenhuma altura muda e só o vértice $v$ pode ganhar algum *overflow*.
+
+Após um *push* não saturante de $u$ para $v$, $u$, que tinha *overflow*, não tem nenhum excesso de fluxo mais, enquanto $v$ deve ter algum, a não ser que seja a fonte. Logo, a função $\Phi$ diminuiu em $h(u)$ e aumentou por $0$ ou por $h(v)$. Como $h(u)-h(v)=1$, o resultado é que a função potencial diminuiu em pelo menos $1$. Portanto, a quantidade de aumento em $\Phi$ é limitada por $\left( 2\left| V \right|-1 \right)\left( \left| V \right|-2 \right)+\left( 2\left| V \right|-1 \right)\left( 2\left| V \right|\left| E \right| \right)\le 4{{\left| V \right|}^{2}}\left| E \right|$. Logo, a complexidade de um push não saturante é de $O\left( {{\left| V \right|}^{2}}\left| E \right| \right)$
+
+Portanto, a complexidade do algoritmo assume o valor mais alto: $O\left( {{\left| V \right|}^{2}}\left| E \right| \right)$.
