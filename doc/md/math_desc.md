@@ -23,7 +23,7 @@ Mas aplicaremos uma relaxação na restrição de conservação de fluxo.
 
 $$\sum\limits_{v\; \in \;V} {f(v,\;u)}  - \sum\limits_{v\; \in \;V} {f(u,\;v)} \ge 0 \Rightarrow e(u) \ge 0$$
 
-O que nos dará mais flexibilidade pois nos dara a liberdade de aumentar o fluxo olhando apenas em um vértice e suas arestas adjacentes.
+Nos da mais flexibilidade e liberdade de aumentar o fluxo olhando apenas em um vértice e suas arestas adjacentes.
 
 *Overflowing* é definido quando $e(u) > 0$.
 
