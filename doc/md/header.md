@@ -3,7 +3,7 @@
 ##### DCC199 Teoria dos Grafos
 
 > Yuri Diego Santos Niitsuma  
-> Bruno Marques
+> Breno Rodrigues Marques da Silva
 
 ## Introdução
 
